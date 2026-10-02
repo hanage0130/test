@@ -1,13 +1,22 @@
-const http = require("http");
+import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 
-const hostname = "0.0.0.0";
-const port = 8000;
+const app = express();
 
-const server = http.createServer((req, res) => {
-  res.writeHead(200, {"Content-Type": "text/plain" });
-  res.end("Hello World\n");
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+
+app.get("/", (request, response) => {
+  response.send(`Hello World! <a href="./lang/ja">日本語</a><a href="./index.html">a</a>`);
+});
+app.get("/lang/ja", (request, response) => {
+  response.send("こんにちは、世界!");
 });
 
-server.listen(port, hostname, () => {
-  console.log(`Server running at http://${hostname}:${port}/`);
+app.listen(3000, '0.0.0.0', () => {
+  console.log("a");
 });
