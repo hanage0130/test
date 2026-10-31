@@ -11,8 +11,13 @@ const todos = await prisma.todo.findMany();
 
 const app = express();
 
-app.get("/", (req, res) => {
+// await prisma.todo.create({ data: { name: "test2" } });
+// await prisma.todo.create({ data: { name: `${(new Date()).toString()}` } });
+
+app.get("/", async (req, res) => {
   res.send(`${todos[0].name}`);
+  await prisma.todo.create({ data: { name: `${(new Date()).toString()}` } });
+  
 });
 
 app.listen(process.env.PORT || 3000, console.log("test"));
