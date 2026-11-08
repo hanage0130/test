@@ -57,6 +57,12 @@ app.get("/", (req, res) => {
           }
         }, 10000);
       </script>
+      <style>
+        *{
+          background-color:black;
+          color:white;
+        }
+      </style>
     </body>
     </html>
   `);
